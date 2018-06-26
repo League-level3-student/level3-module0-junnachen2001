@@ -1,5 +1,7 @@
 package _00_IntroToArrays;
 
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -29,36 +31,65 @@ public class _01_RobotRace {
 			robots[i].move(random);
 		}
 		//6. use a while loop to repeat step 5 until a robot has reached the top of the screen.
-		for(int i = 0; i < 5; i++) {
-			while(robots[i].getY() > 0) {
-				for(int j = 0; j < 5; j++) {
-					robots[j].move((int) (Math.random()*50));
-					robots[j].setSpeed(100);
+		boolean reached = false;
+		while(!reached) {
+			for(int j = 0; j < 5; j++) {
+				robots[j].move((int) (Math.random()*50));
+				robots[j].setSpeed(100);
+				if(robots[j].getY() <= 0) {
+					reached = true;
 				}
 			}
 		}
 		//7. declare that robot the winner and throw it a party!
 		for(int i = 0; i < 5; i++) {
-			if(robots[i].getY() <= 0) {
-				System.out.println("Robot" + i + "is the winner!");
+			if(robots[i].getY() <= 0){
+				System.out.println("Robot " + i + " is the winner!");
 			}
 			robots[i].sparkle();
 			robots[i].clear();
 		}
 		//8. try different races with different amounts of robots.
-    		Robot[] nextRobots = new Robot[10];
-    		for(int i = 0; i < 10; i++) {
-    			while(nextRobots[i].getY() > 0) {
-    				for(int j = 0; j < 10; j++) {
-    					nextRobots[j].move((int) (Math.random()*50));
+    		Robot[] nextRobots = new Robot[3];
+    		for(int i = 0; i < 3; i++) {
+    			nextRobots[i] = new Robot();
+    			nextRobots[i].setX((i + 1) * 100);
+    			nextRobots[i].setY(500);
+    			nextRobots[i].setAngle(0);
+    		}
+    		boolean reached1 = false;
+    		while(!reached1) {
+    			for(int i = 0; i < 3; i++) {
+    				nextRobots[i].move((int) (Math.random()*50));
+    				nextRobots[i].setSpeed(100);
+    				if(nextRobots[i].getY() <= 0) {
+    					reached1 = true;
+    					System.out.println("Robot " + i + " is the winner!");
     				}
+    				nextRobots[i].clear();
     			}
-    			System.out.println("Robot" + i + "is the winner!");
     		}
 	    //9. make the robots race around a circular track.
-    		Robot[] circle = new Robot[5];
-    		for(int i = 0; i < 5; i++) {
-    			nextRobots[i].
+    		Robot[] circle = new Robot[3];
+    		for(int i = 0; i < 3; i++) {
+    			circle[i] = new Robot();
+    			circle[i].setX(450);
+    			circle[i].setY(350);
+    			circle[i].setAngle(0);
+    		}
+    		boolean reached2 = false;
+    		while(!reached2) {
+    			for(int i = 0; i < 3; i++) {
+    				double move = Math.random() * 25;
+    				for(int j = 0; j < move; j++) {
+    					circle[i].move(10);
+    					circle[i].turn(1);
+    				}
+    				if((circle[i].getY() <= 300) || (circle[i].getX() >=450)) {
+    					reached2 = true;
+    					System.out.println("Robot " + i + "is the winner!");
+    				}
+    			}
     		}
 	}
 }
