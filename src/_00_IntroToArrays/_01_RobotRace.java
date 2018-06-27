@@ -73,21 +73,38 @@ public class _01_RobotRace {
     		Robot[] circle = new Robot[3];
     		for(int i = 0; i < 3; i++) {
     			circle[i] = new Robot();
-    			circle[i].setX(450);
-    			circle[i].setY(350);
+    			circle[i].setX(150);
+    			circle[i].setY(250);
     			circle[i].setAngle(0);
     		}
-    		boolean reached2 = false;
-    		while(!reached2) {
+    		int circle1 = 0;
+    		int circle2 = 0; 
+    		int circle3 = 0;
+    		while((circle1 <= 360) && (circle2 <= 360) && (circle3 <= 360)) {
     			for(int i = 0; i < 3; i++) {
     				double move = Math.random() * 25;
     				for(int j = 0; j < move; j++) {
     					circle[i].move(10);
-    					circle[i].turn(1);
+    					circle[i].turn(2);
+    					circle[i].setSpeed(100);
+    					if(i == 0) {
+    						circle1 += 2;
+    					}
+    					else if(i == 1) {
+    						circle2 += 2;
+    					}
+    					else if(i == 2) {
+    						circle3 += 2;
+    					}
     				}
-    				if((circle[i].getY() <= 300) || (circle[i].getX() >=450)) {
-    					reached2 = true;
-    					System.out.println("Robot " + i + "is the winner!");
+    				if(circle1 >= 360) {
+    					System.out.println("Robot 0 is the winner!");
+    				}
+    				else if(circle2 >= 360) {
+    					System.out.println("Robot 1 is the winner!");
+    				}
+    				else if(circle3 >= 360) {
+    					System.out.println("Robot 2 is the winner!");
     				}
     			}
     		}
