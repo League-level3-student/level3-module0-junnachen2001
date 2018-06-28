@@ -25,20 +25,15 @@ public class MoreArrayFun {
 	//5. Write a method that takes an array of Strings and prints all the Strings in the array
 	//   in a completely random order. Almost every run of the program should result in a different order.
 	public static void randomStrings(String[] array) {
-		for(int i = array.length - 1; i >= 0; i--) {
-			int[] temp = new int[array.length];
-			int random = (int) ((i + 1) * Math.random());
-			temp[i] = random;
-			for(int j = 0; j < temp.length; j++) {
-				int twice = 0;
-				if(temp[j] == random) {
-					twice++;
-					if(twice >= 2) {
-						i++;
-					}
-				}
+		for(int i = 0; i < array.length; i++) {
+			int random = (int) (Math.random() * array.length);
+			if(array[random] == null) {
+				i--;
 			}
-			System.out.println(array[random]);
+			if(array[random] != null) {
+				System.out.print(array[random]);
+			}
+			array[random] = null;
 		}
 	}
 	
